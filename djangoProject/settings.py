@@ -25,7 +25,7 @@ SECRET_KEY = '2$iip-fyh&*b+e_u^@@70grr(@xl=7k!nhj_)!u(f%y@rv#$*o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['167.179.105.202']
 
 
 # Application definition
