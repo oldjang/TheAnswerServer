@@ -40,6 +40,8 @@ def login(request):
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
 
+    print(username,password)
+
     uid = 0
     for user in user_data:
         if user['name'] == username and user['password'] == password:
@@ -87,6 +89,8 @@ def question_list(request):
     if request.method == 'POST':
         uid = request.POST.get('uid', None)
         password = request.POST.get('password', None)
+
+    print(uid,password)
 
     if user_data[int(uid) - 1]['password'] == str(password):
         question_file = open("question.json")
