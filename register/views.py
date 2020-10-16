@@ -5,6 +5,25 @@ import json
 
 # Create your views here.
 def register(request):
-    f_obj=open("user.json")
-    x=json.load(f_obj)
-    return HttpResponse(x)
+    user_file = open("user.json")
+    user_data = json.load(user_file)
+    user_file.close()
+    count = len(user_data)
+
+    username = ""
+    password = ""
+    if request.method == 'POST':
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+
+    flag = True
+    for user in user_data:
+        if user['name'] == username:
+            flag = False
+    if flag:
+        user_data.append({'name': username, 'password': password, "uid": count + 1})
+        user_file = open("user.json", 'w')
+        user_file.write(json.dumps(user_data))
+        return HttpResponse(count + 1)
+    else:
+        return HttpResponse(0)
