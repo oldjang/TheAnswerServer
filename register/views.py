@@ -27,3 +27,22 @@ def register(request):
         return HttpResponse(count + 1)
     else:
         return HttpResponse(0)
+
+
+def login(request):
+    user_file = open("user.json")
+    user_data = json.load(user_file)
+    user_file.close()
+    count = len(user_data)
+
+    username = ""
+    password = ""
+    if request.method == 'POST':
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+
+    uid = 0
+    for user in user_data:
+        if user['name'] == username and user['password'] == password:
+            uid = user['uid']
+    return HttpResponse(uid)
